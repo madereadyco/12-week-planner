@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Made Ready 12-Week Planner | Automated Google Sheets Goal Tracker | Made Ready Co</title>
+<meta name="description" content="Made Ready 12-Week Planner — the only 12 Week Year tracker on Etsy with built-in execution scoring automation. Works for personal goals, business goals, or both. One-time purchase. Made Ready Co.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ── DARK THEME (default) ── */
+[data-theme="dark"]{
+  --bg:#0F1117;--bg-mid:#1C2128;--bg-soft:#2D333B;
+  --text-primary:#E6EDF3;--text-body:#CDD9E5;--text-muted:#ADBAC7;--text-faint:#768390;
+  --border:#444C56;--border-light:rgba(68,76,86,0.4);
+  --nav-bg:rgba(15,17,23,0.94);
+  --card-bg:#1C2128;--card-hover:#2D333B;
+  --formula-bg:#0F1117;--formula-cell:#2D333B;
+  --sheet-chrome:#2D333B;--sheet-toolbar:#1C2128;--sheet-tab-active:#1C2128;
+  --sheet-cell-hdr:rgba(52,168,83,0.08);
+  --proof-card:#0F1117;
+  --compare-hdr:#2D333B;--compare-sec:#2D333B;
+  --sec-callout:#1C2128;
+  --etsy-section:#1C2128;
+  --footer-bg:#0F1117;
+  --toggle-bg:#2D333B;--toggle-icon:☀️;
+}
+
+/* ── LIGHT THEME ── */
+[data-theme="light"]{
+  --bg:#F6F8FA;--bg-mid:#FFFFFF;--bg-soft:#EEF1F4;
+  --text-primary:#1C2128;--text-body:#2D333B;--text-muted:#57606A;--text-faint:#8C959F;
+  --border:#D0D7DE;--border-light:rgba(208,215,222,0.8);
+  --nav-bg:rgba(246,248,250,0.96);
+  --card-bg:#FFFFFF;--card-hover:#F6F8FA;
+  --formula-bg:#F6F8FA;--formula-cell:#EEF1F4;
+  --sheet-chrome:#EEF1F4;--sheet-toolbar:#F6F8FA;--sheet-tab-active:#FFFFFF;
+  --sheet-cell-hdr:rgba(30,126,52,0.06);
+  --proof-card:#F6F8FA;
+  --compare-hdr:#EEF1F4;--compare-sec:#F6F8FA;
+  --sec-callout:#FFFFFF;
+  --etsy-section:#FFFFFF;
+  --footer-bg:#EEF1F4;
+  --toggle-bg:#EEF1F4;--toggle-icon:🌙;
+}
+
+:root{
+  --green:#1E7E34;--green-mid:#2EA043;--green-light:#34A853;
+  --font-display:'DM Sans',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text-body);line-height:1.6;overflow-x:hidden;transition:background .25s,color .25s}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;transition:background .25s,border-color .25s}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-mark{width:28px;height:28px;background:var(--green);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-logo-mark svg{width:16px;height:16px;fill:#fff}
+.nav-brand{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--text-primary);letter-spacing:-0.2px}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.nav-links{display:flex;align-items:center;gap:1.5rem}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:13px;transition:color .2s}
+.nav-links a:hover{color:var(--text-primary)}
+.nav-cta{background:var(--green);color:#fff!important;padding:7px 16px;border-radius:6px;font-size:13px;font-weight:500;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--green-light)!important}
+.theme-toggle{width:34px;height:34px;border-radius:8px;background:var(--toggle-bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;transition:background .2s,border-color .2s;flex-shrink:0;line-height:1}
+.theme-toggle:hover{border-color:var(--text-faint)}
+
+/* ── HAMBURGER ── */
+.hamburger{
+  width:34px;height:34px;cursor:pointer;
+  border:1px solid var(--border);border-radius:8px;
+  background:var(--toggle-bg);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:background .2s,border-color .2s;
+  padding:0;color:var(--text-muted);
+}
+.hamburger:hover{border-color:var(--text-faint);color:var(--text-primary)}
+.hamburger svg{width:18px;height:18px;display:block;flex-shrink:0}
+.hamburger .icon-open{display:block}
+.hamburger .icon-close{display:none}
+.hamburger.open .icon-open{display:none}
+.hamburger.open .icon-close{display:block}
+
+/* ── MOBILE DRAWER ── */
+.mobile-menu{
+  position:fixed;top:56px;left:0;right:0;z-index:99;
+  background:var(--nav-bg);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0.5rem 1.5rem 1.25rem;
+  flex-direction:column;gap:0;
+  transform:translateY(-6px);opacity:0;
+  pointer-events:none;
+  transition:transform .25s,opacity .25s;
+  display:none;
+}
+.mobile-menu.show{transform:translateY(0);opacity:1;pointer-events:auto}
+.mobile-menu a{color:var(--text-muted);text-decoration:none;font-size:14px;padding:12px 0;border-bottom:1px solid var(--border-light)}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu .mob-cta{color:var(--green-light)!important;font-weight:600}
+
+/* ── HERO ── */
+.hero{position:relative;padding:120px 2rem 70px;text-align:center;overflow:hidden}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--border-light) 1px,transparent 1px),linear-gradient(90deg,var(--border-light) 1px,transparent 1px);background-size:48px 48px;opacity:.35;mask-image:radial-gradient(ellipse 60% 50% at 50% 0%,#000 40%,transparent 100%)}
+.hero-glow{position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(52,168,83,0.18),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;max-width:740px;margin:0 auto}
+.formula-bar{display:inline-flex;align-items:center;gap:10px;background:var(--formula-bg);border:1px solid var(--border);border-radius:8px;padding:8px 16px;margin-bottom:28px;font-family:var(--font-mono);font-size:12px;color:var(--text-faint)}
+.formula-text{color:var(--green-light)}
+.hero-eyebrow{display:inline-block;background:rgba(52,168,83,0.1);color:var(--green-light);font-size:12px;font-weight:600;padding:5px 14px;border-radius:20px;margin-bottom:20px;border:1px solid rgba(52,168,83,0.25)}
+.hero-h1{font-family:var(--font-display);font-size:3rem;font-weight:600;letter-spacing:-1.5px;color:var(--text-primary);margin-bottom:20px;line-height:1.08}
+.hero-h1 em{font-style:italic;color:var(--green-light);font-weight:500}
+.hero-sub{font-size:16px;color:var(--text-muted);max-width:580px;margin:0 auto 28px;line-height:1.7}
+.bank-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:32px}
+.bank-pill{display:flex;align-items:center;gap:6px;background:var(--card-bg);border:1px solid var(--border);padding:6px 14px;border-radius:20px;font-size:12.5px;color:var(--text-body)}
+.bank-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--green-light)}
+.hero-actions{display:flex;gap:12px;justify-content:center;margin-bottom:36px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:13px 26px;border-radius:8px;font-size:14.5px;font-weight:500;text-decoration:none;transition:background .2s,transform .15s}
+.btn-primary:hover{background:var(--green-light);transform:translateY(-1px)}
+.btn-secondary{display:inline-flex;align-items:center;background:var(--card-bg);border:1px solid var(--border);color:var(--text-body);padding:13px 26px;border-radius:8px;font-size:14.5px;font-weight:500;text-decoration:none;transition:border-color .2s,transform .15s}
+.btn-secondary:hover{border-color:var(--text-faint);transform:translateY(-1px)}
+.hero-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:1.75rem;font-size:12.5px;color:var(--text-faint)}
+.hero-trust-item{display:flex;align-items:center;gap:6px}
+.trust-dot{width:5px;height:5px;border-radius:50%;background:var(--green-light)}
+
+/* ── SHEET PREVIEW ── */
+.preview-wrap{background:var(--bg);padding:0 2rem 80px;transition:background .25s}
+.sheet-preview{background:var(--bg-mid);border:1px solid var(--border);border-radius:12px;overflow:hidden;max-width:880px;margin:0 auto;box-shadow:0 8px 32px rgba(0,0,0,0.12);transition:all .25s}
+.sheet-chrome{background:var(--sheet-chrome);padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+.chrome-dot{width:11px;height:11px;border-radius:50%}
+.chrome-title{flex:1;text-align:center;font-size:12px;color:var(--text-faint);font-family:var(--font-mono)}
+.sheet-toolbar{background:var(--sheet-toolbar);padding:6px 16px;display:flex;align-items:center;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-faint)}
+.sheet-menu-items{display:flex;gap:16px}
+.sheet-menu-items span.ai{color:var(--green-light);font-weight:500}
+.sheet-formula-bar{display:flex;align-items:center;background:var(--formula-bg);border:1px solid var(--border);border-radius:4px;font-family:var(--font-mono);font-size:12px;overflow:hidden;margin:8px 12px}
+.sfb-ref{background:var(--formula-cell);color:var(--text-muted);padding:4px 10px;border-right:1px solid var(--border);flex-shrink:0}
+.sfb-val{padding:4px 12px;color:#1A73E8;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+[data-theme="dark"] .sfb-val{color:#79C0FF}
+.sheet-tabs{display:flex;background:var(--formula-bg);border-bottom:1px solid var(--border);padding:6px 8px 0;overflow-x:auto;gap:0}
+.stab{padding:6px 14px;font-size:12px;font-family:var(--font-mono);border-radius:4px 4px 0 0;cursor:pointer;white-space:nowrap;border:1px solid transparent;border-bottom:none;transition:all .2s;color:var(--text-faint);user-select:none}
+.stab.active{background:var(--sheet-tab-active);color:var(--text-primary);border-color:var(--border)}
+.stab:not(.active):hover{color:var(--text-muted);background:rgba(255,255,255,0.03)}
+.tab-panel{animation:fadeTab .18s ease}
+@keyframes fadeTab{from{opacity:0;transform:translateY(2px)}to{opacity:1;transform:translateY(0)}}
+.sheet-grid{display:grid;grid-template-columns:36px repeat(5,1fr);font-size:11px;font-family:var(--font-mono)}
+.sgch{background:var(--bg-soft);border-bottom:1px solid var(--border);border-right:1px solid var(--border);padding:4px 8px;text-align:center;color:var(--text-faint);font-size:10px}
+.sgrn{background:var(--bg-soft);border-bottom:1px solid var(--border);border-right:1px solid var(--border);padding:4px 6px;text-align:center;color:var(--text-faint);font-size:10px}
+.sgc{border-bottom:1px solid var(--border-light);border-right:1px solid var(--border-light);padding:4px 8px;color:var(--text-body);white-space:nowrap;overflow:hidden;font-size:11px}
+.sgc.hdr{background:var(--sheet-cell-hdr);color:var(--green-light);font-weight:500}
+.sgc.grn{color:#2EA043}
+[data-theme="dark"] .sgc.grn{color:#34A853}
+.sgc.red{color:#CF222E}
+[data-theme="dark"] .sgc.red{color:#F47067}
+.sgc.amber{color:#9A6700}
+[data-theme="dark"] .sgc.amber{color:#F9A825}
+.sgc.dim{color:var(--text-faint)}
+.sgc.blue{color:#1A73E8}
+[data-theme="dark"] .sgc.blue{color:#79C0FF}
+.sgc.hl{background:rgba(52,168,83,0.07)}
+.ai-banner{background:rgba(52,168,83,0.06);border-top:1px solid rgba(52,168,83,0.2);padding:10px 16px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--green-mid)}
+[data-theme="dark"] .ai-banner{background:rgba(52,168,83,0.08);color:var(--green-light)}
+.ai-pill{background:rgba(52,168,83,0.15);color:var(--green-light);padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;border:1px solid rgba(52,168,83,0.3);flex-shrink:0}
+.tab-caption{padding:10px 16px;font-size:12px;color:var(--text-faint);border-top:1px solid var(--border-light);font-style:italic;line-height:1.5}
+
+/* ── UK DIFFERENTIATOR BANNER (repurposed: METHOD BANNER) ── */
+.uk-banner{background:linear-gradient(135deg,rgba(30,126,52,0.12) 0%,rgba(52,168,83,0.06) 100%);border-top:1px solid rgba(52,168,83,0.2);border-bottom:1px solid rgba(52,168,83,0.2);padding:40px 2rem;transition:background .25s}
+.uk-banner-inner{max-width:960px;margin:0 auto}
+.uk-banner-label{font-size:11px;font-weight:700;color:var(--green-light);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:24px;text-align:center}
+.uk-stats{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:0;align-items:center;margin-bottom:24px}
+.uk-stat{text-align:center;padding:0 20px}
+.uk-stat-num{font-family:var(--font-display);font-size:2.4rem;font-weight:800;color:var(--green-light);letter-spacing:-2px;line-height:1;margin-bottom:8px}
+.uk-stat-desc{font-size:12px;color:var(--text-muted);line-height:1.5;max-width:180px;margin:0 auto}
+.uk-stat-divider{width:1px;height:60px;background:rgba(52,168,83,0.25);flex-shrink:0}
+.uk-banner-verdict{text-align:center;font-size:14px;color:var(--text-muted);font-style:italic;border-top:1px solid rgba(52,168,83,0.15);padding-top:20px;max-width:620px;margin:0 auto;line-height:1.7}
+.uk-banner-verdict strong{color:var(--text-primary);font-style:normal}
+
+/* ── SECTION SHARED ── */
+section{padding:90px 2rem}
+.si{max-width:1040px;margin:0 auto}
+.eyebrow{font-size:12px;font-weight:600;color:var(--green-light);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+.sh2{font-family:var(--font-display);font-size:2.1rem;font-weight:600;letter-spacing:-1px;color:var(--text-primary);margin-bottom:14px;line-height:1.2}
+.ssub{font-size:15px;color:var(--text-muted);max-width:600px;margin-bottom:3rem;line-height:1.7}
+
+/* ── HOW IT WORKS ── */
+.how-grid{display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start}
+.how-steps{display:flex;flex-direction:column;gap:28px}
+.how-step{display:flex;gap:16px}
+.how-step-num{width:32px;height:32px;border-radius:8px;background:rgba(52,168,83,0.1);border:1px solid rgba(52,168,83,0.25);color:var(--green-light);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;flex-shrink:0}
+.how-step-title{font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--text-primary);margin-bottom:6px}
+.how-step-desc{font-size:13.5px;color:var(--text-muted);line-height:1.65}
+.how-step-tag{display:inline-block;margin-top:8px;font-size:11px;color:var(--green-light);background:rgba(52,168,83,0.08);padding:3px 10px;border-radius:12px;border:1px solid rgba(52,168,83,0.2)}
+.how-visual{position:sticky;top:90px;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:24px;font-size:13px}
+.flow-step{display:flex;flex-direction:column;gap:2px;padding:12px 0;border-bottom:1px solid var(--border-light)}
+.flow-step:last-child{border-bottom:none}
+.flow-label{font-size:11px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.04em}
+.flow-value{font-family:var(--font-mono);font-size:12.5px;color:var(--text-body)}
+.flow-arrow{text-align:center;color:var(--text-faint);font-size:14px;padding:2px 0}
+.flow-highlight{color:var(--green-light);font-weight:500}
+.no-key-note{margin-top:16px;padding:12px 14px;background:rgba(52,168,83,0.06);border:1px solid rgba(52,168,83,0.2);border-radius:8px;font-size:12px;color:var(--text-muted);line-height:1.6}
+
+/* ── CSV SECTION (repurposed: METHOD EXPLAINER) ── */
+.csv-section{background:var(--bg-mid);border-top:1px solid var(--border)}
+.csv-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:3rem;align-items:start}
+.csv-explainer{display:flex;flex-direction:column;gap:28px}
+.csv-what{display:flex;gap:16px;align-items:flex-start}
+.csv-what-icon{font-size:28px;flex-shrink:0;margin-top:2px}
+.csv-what-title{font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--text-primary);margin-bottom:10px}
+.csv-what-text{font-size:13px;color:var(--text-muted);line-height:1.7}
+.csv-banks-title{font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.csv-bank-list{display:flex;flex-direction:column;gap:0}
+.csv-bank{padding:12px 0;border-bottom:1px solid var(--border)}
+.csv-bank:last-child{border-bottom:none}
+.csv-bank-name{font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:4px}
+.csv-bank-steps{font-size:12px;color:var(--text-muted);line-height:1.6}
+.csv-bank-steps strong{color:var(--text-body)}
+.csv-visual{display:flex;flex-direction:column;gap:0;position:sticky;top:80px}
+.csv-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px;transition:background .25s}
+.csv-card-label{font-size:10px;font-weight:700;color:var(--text-faint);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px}
+.csv-file{background:var(--bg-soft);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.csv-file-header{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg-mid);border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:12px;color:var(--text-muted)}
+.csv-file-icon{font-size:14px}
+.csv-file-name{color:var(--text-body);font-weight:500}
+.csv-code{padding:12px;font-family:var(--font-mono);font-size:11px;line-height:1.8;overflow-x:auto}
+.csv-row{display:block;color:var(--text-muted)}
+.csv-row.csv-header{color:var(--green-light);font-weight:500}
+.csv-row.csv-more{color:var(--text-faint);font-style:italic}
+.csv-card-note{font-size:12px;color:var(--text-faint);line-height:1.6;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.csv-steps-mini{display:flex;flex-direction:column;gap:8px}
+.csv-step-mini{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text-muted)}
+.csv-step-n{width:20px;height:20px;border-radius:50%;background:rgba(52,168,83,0.12);border:1px solid rgba(52,168,83,0.25);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--green-light);flex-shrink:0;margin-top:1px}
+
+/* ── FEATURES ── */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:24px;transition:border-color .2s,transform .15s}
+.feat-card:hover{border-color:var(--text-faint);transform:translateY(-2px)}
+.feat-icon{font-size:22px;margin-bottom:14px;display:block}
+.feat-title{font-family:var(--font-display);font-size:15.5px;font-weight:600;color:var(--text-primary);margin-bottom:8px}
+.feat-p{font-size:13px;color:var(--text-muted);line-height:1.65;margin-bottom:12px}
+.feat-tag{font-size:10.5px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.05em}
+.feat-tag.pro{color:var(--green-light)}
+
+/* ── SECURITY (repurposed: PRIVACY) ── */
+.sec-grid{display:grid;grid-template-columns:1fr 360px;gap:48px;align-items:start}
+.sec-item{display:flex;gap:16px;margin-bottom:28px}
+.sec-icon{width:38px;height:38px;border-radius:10px;background:rgba(52,168,83,0.1);border:1px solid rgba(52,168,83,0.2);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.sec-title{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--text-primary);margin-bottom:6px}
+.sec-desc{font-size:13px;color:var(--text-muted);line-height:1.65}
+.sec-callout{position:sticky;top:90px;background:var(--sec-callout);border:1px solid var(--border);border-radius:12px;padding:24px}
+.sec-callout-title{font-family:var(--font-display);font-size:14.5px;font-weight:600;color:var(--text-primary);margin-bottom:14px}
+.sec-check{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--text-muted);margin-bottom:10px;line-height:1.5}
+.sec-check svg{flex-shrink:0;margin-top:2px}
+.sec-bottom{margin-top:18px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--text-faint);line-height:1.6}
+
+/* ── COMPARISON ── */
+.compare-table{border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.compare-hdr{display:grid;grid-template-columns:1fr 130px 130px;background:var(--compare-hdr);font-size:12px;font-weight:600}
+.chc{padding:14px 16px;color:var(--text-muted)}
+.chc.pro{color:var(--green-light)}
+.compare-section{background:var(--compare-sec);padding:8px 16px;font-size:11px;font-weight:600;color:var(--text-faint);text-transform:uppercase;letter-spacing:.04em}
+.crow{display:grid;grid-template-columns:1fr 130px 130px;border-top:1px solid var(--border-light);align-items:center}
+.cc{padding:12px 16px;font-size:13px;color:var(--text-body)}
+.cc.feat small{display:block;color:var(--text-faint);font-size:11px;margin-top:2px}
+.cc.chk,.cc.pro-chk{text-align:center}
+.chk-yes{color:var(--green-light);font-weight:600}
+.chk-no{color:var(--text-faint)}
+.chk-ai{color:var(--green-light);font-weight:600;font-size:11px;background:rgba(52,168,83,0.1);padding:2px 8px;border-radius:10px}
+
+/* ── PRICING ── */
+.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.price-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:32px;position:relative}
+.price-card.featured{border-color:var(--green-light);box-shadow:0 0 0 1px var(--green-light)}
+.price-badge{position:absolute;top:-11px;left:28px;background:var(--green);color:#fff;font-size:10.5px;font-weight:600;padding:3px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.04em}
+.price-name{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--text-primary);margin-bottom:6px}
+.price-amount{font-family:var(--font-display);font-size:2.6rem;font-weight:700;color:var(--text-primary);letter-spacing:-1px;margin-bottom:4px}
+.price-period{font-size:12.5px;color:var(--text-faint);margin-bottom:20px}
+.price-desc{font-size:13px;color:var(--text-muted);line-height:1.65;margin-bottom:22px}
+.pc-feature{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text-body);margin-bottom:13px;line-height:1.5}
+.pc-feature svg{flex-shrink:0;margin-top:2px}
+.price-cta{display:block;text-align:center;background:var(--green);color:#fff;padding:13px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;margin-top:24px;transition:background .2s}
+.price-cta:hover{background:var(--green-light)}
+.price-cta.secondary{background:transparent;border:1px solid var(--border);color:var(--text-body)}
+.price-cta.secondary:hover{border-color:var(--text-faint)}
+.upgrade-note{text-align:center;margin-top:24px;font-size:13px;color:var(--text-faint)}
+.upgrade-note a{color:var(--green-light);text-decoration:none}
+
+/* ── STATS / PROOF ── */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid var(--border)}
+.stat-cell{text-align:center}
+.stat-num{font-family:var(--font-display);font-size:2.2rem;font-weight:700;color:var(--green-light);letter-spacing:-1px}
+.stat-label{font-size:12.5px;color:var(--text-faint);margin-top:4px}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.proof-card{background:var(--proof-card);border:1px solid var(--border);border-radius:12px;padding:22px}
+.proof-stars{color:#F9A825;font-size:13px;margin-bottom:12px}
+.proof-text{font-size:13.5px;color:var(--text-body);line-height:1.65;margin-bottom:16px}
+.proof-author{display:flex;align-items:center;gap:10px}
+.proof-avatar{width:32px;height:32px;border-radius:50%;background:rgba(52,168,83,0.15);color:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600}
+.proof-name{font-size:12.5px;font-weight:500;color:var(--text-primary)}
+.proof-meta{font-size:11px;color:var(--text-faint)}
+
+/* ── FAQ ── */
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{padding:20px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:14.5px;font-weight:500;color:var(--text-primary)}
+.faq-toggle{font-size:18px;color:var(--text-faint);transition:transform .2s}
+.faq-item.open .faq-toggle{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease}
+.faq-item.open .faq-a{max-height:300px}
+.faq-a p{padding-bottom:20px;font-size:13.5px;color:var(--text-muted);line-height:1.7}
+
+/* ── ETSY CTA ── */
+.etsy-section{background:var(--etsy-section);text-align:center;border-top:1px solid var(--border)}
+.etsy-actions{display:flex;gap:14px;justify-content:center;margin-top:28px}
+
+/* ── FOOTER ── */
+footer{background:var(--footer-bg);border-top:1px solid var(--border);padding:60px 2rem 30px}
+.footer-top{max-width:1040px;margin:0 auto 40px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px}
+.footer-brand-text{font-size:13px;color:var(--text-faint);line-height:1.7;margin-top:12px;max-width:280px}
+.footer-col h5{font-size:12px;color:var(--text-primary);margin-bottom:14px;text-transform:uppercase;letter-spacing:.04em}
+.footer-col a{display:block;color:var(--text-faint);text-decoration:none;font-size:13px;margin-bottom:10px}
+.footer-col a:hover{color:var(--text-muted)}
+.footer-bottom{max-width:1040px;margin:0 auto;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px;color:var(--text-faint)}
+.footer-tags{display:flex;gap:8px;flex-wrap:wrap}
+.footer-tag{font-size:10.5px;color:var(--text-faint);background:var(--card-bg);border:1px solid var(--border);padding:3px 10px;border-radius:10px}
+
+/* ── METHOD / UK-STYLE BANNER (12 WEEK YEAR EXPLAINER) ── */
+.csv-section.method-section .csv-banks-title{margin-top:0}
+
+/* ── RESPONSIVE ── */
+@media(max-width:760px){
+  .hamburger{display:flex!important}
+  .nav-links{display:none!important}
+  nav{padding:0 1.25rem}
+  .hero{padding:100px 1.25rem 60px}
+  .hero-h1{font-size:2rem;letter-spacing:-1px}
+  .formula-bar{font-size:11px;max-width:100%}
+  .formula-text{font-size:10px}
+  .hero-trust{gap:1rem}
+  .preview-wrap{padding:0 1.25rem 60px}
+  .uk-stats{grid-template-columns:1fr 1fr;gap:16px}
+  .uk-stat-divider{display:none}
+  .uk-stat{padding:0}
+  .uk-stat-num{font-size:1.8rem}
+  .csv-grid,.how-grid,.sec-grid{grid-template-columns:1fr}
+  .csv-visual{position:static}
+  .how-visual,.sec-callout{position:static;margin-top:2rem}
+  section{padding:60px 1.25rem}
+  .pricing-section .price-grid{grid-template-columns:1fr}
+  .compare-hdr,.crow{grid-template-columns:1fr 80px 80px}
+  .chc,.cc{padding:10px 12px;font-size:12px}
+  .cc.feat small{display:none}
+  .footer-top{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr}
+  .proof-grid{grid-template-columns:1fr}
+  .etsy-actions{flex-direction:column;align-items:center}
+  .feat-grid{grid-template-columns:1fr}
+  .footer-tags{display:none}
+  .hero-actions{flex-direction:column;align-items:flex-start}
+  .btn-primary,.btn-secondary{width:100%;justify-content:center}
+  .price-card{padding:22px 18px}
+  .bank-pills{gap:6px}
+  .bank-pill{font-size:11px;padding:4px 10px}
+}
+@media(min-width:761px){
+  .hamburger{display:none!important}
+  .mobile-menu{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 16 16"><path d="M2 2h5v5H2zM9 2h5v5H9zM2 9h5v5H2zM9 9h5v5H9z"/></svg>
+    </div>
+    <span class="nav-brand">Made Ready Co</span>
+  </a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#how-it-works">How it works</a>
+      <a href="#method">The 12 Week Year</a>
+      <a href="#features">Features</a>
+      <a href="#comparison">Standard vs Pro</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#get-it" class="nav-cta">Get on Etsy</a>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode" id="theme-btn">☀️</button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false">
+      <svg class="icon-open" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="2" y1="4.5" x2="16" y2="4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="2" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="2" y1="13.5" x2="16" y2="13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <svg class="icon-close" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="3" y1="3" x2="15" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="15" y1="3" x2="3" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU DRAWER -->
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Navigation menu">
+  <a href="#how-it-works" onclick="closeMenu()">How it works</a>
+  <a href="#method" onclick="closeMenu()">The 12 Week Year</a>
+  <a href="#features" onclick="closeMenu()">Features</a>
+  <a href="#comparison" onclick="closeMenu()">Standard vs Pro</a>
+  <a href="#pricing" onclick="closeMenu()">Pricing</a>
+  <a href="#faq" onclick="closeMenu()">FAQ</a>
+  <a href="#get-it" class="mob-cta" onclick="closeMenu()">Get on Etsy</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="formula-bar">
+      <span>fx</span>
+      <span class="formula-text">=EXECUTION_SCORE(WeeklyPlan, Scorecard) → 85%+ target</span>
+    </div>
+    <div class="hero-eyebrow">The only 12 Week Year tracker on Etsy with automated scoring</div>
+    <h1 class="hero-h1">12 weeks feels<br>like a year.<br><em>Make it count.</em></h1>
+    <p class="hero-sub">Made Ready 12-Week Planner turns the 12 Week Year method into a fully automated Google Sheets system. Set up to 3 goals, plan every week, and watch your execution score calculate itself — no manual tallying, ever. Works for personal goals, business goals, or both. No subscription. Yours forever.</p>
+    <div class="bank-pills">
+      <div class="bank-pill"><div class="bank-pill-dot"></div>Fitness &amp; Habits</div>
+      <div class="bank-pill"><div class="bank-pill-dot"></div>Side Projects</div>
+      <div class="bank-pill"><div class="bank-pill-dot"></div>Career &amp; Business</div>
+      <div class="bank-pill"><div class="bank-pill-dot"></div>Sales Targets</div>
+      <div class="bank-pill"><div class="bank-pill-dot"></div>Team OKRs</div>
+      <div class="bank-pill"><div class="bank-pill-dot"></div>Or All Of It</div>
+    </div>
+    <div class="hero-actions">
+      <a href="#pricing" class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="7" r="6.5" stroke="currentColor" fill="none"/><path d="M5.5 4.5l4 2.5-4 2.5V4.5z"/></svg>
+        See pricing
+      </a>
+      <a href="#method" class="btn-secondary">What is the 12 Week Year?</a>
+    </div>
+    <div class="hero-trust">
+      <div class="hero-trust-item"><div class="trust-dot"></div>Automated execution scoring — no manual maths</div>
+      <div class="hero-trust-item"><div class="trust-dot"></div>Your data stays in your Google account</div>
+      <div class="hero-trust-item"><div class="trust-dot"></div>Set up in under 10 minutes</div>
+    </div>
+  </div>
+</section>
+
+<!-- SHEET PREVIEW -->
+<div class="preview-wrap">
+  <div class="sheet-preview">
+    <div class="sheet-chrome">
+      <div class="chrome-dot" style="background:#FF5F57"></div>
+      <div class="chrome-dot" style="background:#FFBD2E"></div>
+      <div class="chrome-dot" style="background:#28C840"></div>
+      <div class="chrome-title">Made Ready 12-Week Planner — Google Sheets · Made Ready Co</div>
+    </div>
+    <div class="sheet-toolbar">
+      <div class="sheet-menu-items">
+        <span>File</span>&nbsp;&nbsp;<span>Edit</span>&nbsp;&nbsp;<span>View</span>&nbsp;&nbsp;<span>Insert</span>&nbsp;&nbsp;<span>Format</span>&nbsp;&nbsp;<span>Data</span>&nbsp;&nbsp;<span class="ai">🤖 Made Ready 12-Week</span>
+      </div>
+    </div>
+
+    <div class="sheet-formula-bar">
+      <div class="sfb-ref" id="sfb-ref">A1</div>
+      <div class="sfb-val" id="sfb-val">=B4+83</div>
+    </div>
+
+    <div class="sheet-tabs">
+      <div class="stab active" data-tab="vision"   onclick="switchTab('vision')">🎯 Vision &amp; Goals</div>
+      <div class="stab"        data-tab="weekly"    onclick="switchTab('weekly')">🗓️ Weekly Plan</div>
+      <div class="stab"        data-tab="scorecard" onclick="switchTab('scorecard')">📊 Scorecard</div>
+      <div class="stab"        data-tab="habits"    onclick="switchTab('habits')">🔁 Habit Tracker</div>
+      <div class="stab"        data-tab="review"    onclick="switchTab('review')">🪞 Review</div>
+    </div>
+
+    <!-- 🎯 VISION & GOALS -->
+    <div class="tab-panel" id="tab-vision">
+      <div class="sheet-grid">
+        <div class="sgch"></div><div class="sgch">A</div><div class="sgch">B</div><div class="sgch">C</div><div class="sgch">D</div><div class="sgch">E</div>
+        <div class="sgrn">1</div><div class="sgc hdr" style="grid-column:span 2">📅 This 12-Week Cycle</div><div class="sgc hdr"></div><div class="sgc hdr" style="grid-column:span 2">🥇 Top 3 Goals</div>
+        <div class="sgrn">2</div><div class="sgc">Cycle start date</div><div class="sgc grn">17 Jun 2026</div><div class="sgc"></div><div class="sgc dim">Goal 1</div><div class="sgc">Fitness</div>
+        <div class="sgrn">3</div><div class="sgc">Cycle end date</div><div class="sgc blue">=B4+83</div><div class="sgc"></div><div class="sgc dim">Goal 2</div><div class="sgc">Career / Business</div>
+        <div class="sgrn">4</div><div class="sgc">Planning mode</div><div class="sgc">Both</div><div class="sgc"></div><div class="sgc dim">Goal 3</div><div class="sgc">Personal Project</div>
+        <div class="sgrn">5</div><div class="sgc hdr" style="grid-column:span 2">🌅 Your Vision</div><div class="sgc hdr"></div><div class="sgc dim">Category</div><div class="sgc grn">12 options</div>
+        <div class="sgrn">6</div><div class="sgc" style="grid-column:span 2">"Run a sub-25 5K, launch the side</div><div class="sgc"></div><div class="sgc dim">Target metric</div><div class="sgc">per goal</div>
+        <div class="sgrn">7</div><div class="sgc" style="grid-column:span 2">project, and ship the Q3 roadmap."</div><div class="sgc"></div><div class="sgc dim">Max enforced</div><div class="sgc grn">3 goals only</div>
+      </div>
+      <div class="tab-caption">Write your vision, set up to 3 goals — never more, focus is the whole method — and the cycle dates calculate themselves.</div>
+    </div>
+
+    <!-- 🗓️ WEEKLY PLAN -->
+    <div class="tab-panel" id="tab-weekly" style="display:none">
+      <div class="sheet-grid">
+        <div class="sgch"></div><div class="sgch">A</div><div class="sgch">B</div><div class="sgch">C</div><div class="sgch">D</div><div class="sgch">E</div>
+        <div class="sgrn">1</div><div class="sgc hdr">Week</div><div class="sgc hdr">Start</div><div class="sgc hdr">End</div><div class="sgc hdr">Key Tactic / Action</div><div class="sgc hdr">Linked Goal</div>
+        <div class="sgrn">2</div><div class="sgc grn">Week 1</div><div class="sgc dim">17 Jun</div><div class="sgc dim">23 Jun</div><div class="sgc">Run 3x this week — easy pace</div><div class="sgc">Fitness</div>
+        <div class="sgrn">3</div><div class="sgc"></div><div class="sgc"></div><div class="sgc"></div><div class="sgc">Draft side project outline</div><div class="sgc">Personal Project</div>
+        <div class="sgrn">4</div><div class="sgc"></div><div class="sgc"></div><div class="sgc"></div><div class="sgc">Q3 roadmap — first draft</div><div class="sgc">Career / Business</div>
+        <div class="sgrn">5</div><div class="sgc grn">Week 2</div><div class="sgc dim">24 Jun</div><div class="sgc dim">30 Jun</div><div class="sgc">Run 4x — add one interval session</div><div class="sgc">Fitness</div>
+        <div class="sgrn">6</div><div class="sgc"></div><div class="sgc"></div><div class="sgc"></div><div class="sgc">Build side project landing page</div><div class="sgc">Personal Project</div>
+        <div class="sgrn">7</div><div class="sgc"></div><div class="sgc"></div><div class="sgc"></div><div class="sgc">Share roadmap draft for feedback</div><div class="sgc">Career / Business</div>
+        <div class="sgrn">8</div><div class="sgc amber" style="grid-column:span 5">⏳ Buffer Week (Week 13) — rest, review, plan the next cycle</div>
+      </div>
+      <div class="tab-caption">Dates auto-calculate from your cycle start. Tick tactics off as you go — the Scorecard reads this tab automatically.</div>
+    </div>
+
+    <!-- 📊 SCORECARD -->
+    <div class="tab-panel" id="tab-scorecard" style="display:none">
+      <div class="sheet-grid">
+        <div class="sgch"></div><div class="sgch">A</div><div class="sgch">B</div><div class="sgch">C</div><div class="sgch">D</div><div class="sgch">E</div>
+        <div class="sgrn">1</div><div class="sgc hdr">Week</div><div class="sgc hdr">Tasks Set</div><div class="sgc hdr">Tasks Done</div><div class="sgc hdr">Execution %</div><div class="sgc hdr">Status</div>
+        <div class="sgrn">2</div><div class="sgc">Week 1</div><div class="sgc dim">3</div><div class="sgc dim">3</div><div class="sgc grn">100%</div><div class="sgc grn">✓ On Track</div>
+        <div class="sgrn">3</div><div class="sgc">Week 2</div><div class="sgc dim">3</div><div class="sgc dim">2</div><div class="sgc amber">67%</div><div class="sgc amber">⚠ Behind</div>
+        <div class="sgrn">4</div><div class="sgc">Week 3</div><div class="sgc dim">3</div><div class="sgc dim">3</div><div class="sgc grn">100%</div><div class="sgc grn">✓ On Track</div>
+        <div class="sgrn">5</div><div class="sgc">Week 4</div><div class="sgc dim">3</div><div class="sgc dim">3</div><div class="sgc grn">100%</div><div class="sgc grn">✓ On Track</div>
+        <div class="sgrn">6</div><div class="sgc">Week 5</div><div class="sgc dim">3</div><div class="sgc dim">2</div><div class="sgc amber">67%</div><div class="sgc amber">⚠ Behind</div>
+        <div class="sgrn">7</div><div class="sgc hl" style="font-weight:600">12-WEEK AVERAGE</div><div class="sgc hl"></div><div class="sgc hl"></div><div class="sgc hl grn" style="font-weight:600">87%</div><div class="sgc hl grn">← target 85%+</div>
+      </div>
+      <div class="ai-banner">
+        <span class="ai-pill">MR12W PRO</span>
+        <span>✨ AI Coach: Your execution dips every Tuesday. Consider moving your fitness tactic to Monday mornings when your score is consistently 100%.</span>
+      </div>
+      <div class="tab-caption">Tasks Set and Tasks Done pull automatically from Weekly Plan. Execution % and status colour-code themselves — no manual tallying.</div>
+    </div>
+
+    <!-- 🔁 HABIT TRACKER -->
+    <div class="tab-panel" id="tab-habits" style="display:none">
+      <div class="sheet-grid">
+        <div class="sgch"></div><div class="sgch">A</div><div class="sgch">B</div><div class="sgch">C</div><div class="sgch">D</div><div class="sgch">E</div>
+        <div class="sgrn">1</div><div class="sgc hdr">Habit</div><div class="sgc hdr">Mon</div><div class="sgc hdr">Tue</div><div class="sgc hdr">Wed</div><div class="sgc hdr">Week %</div>
+        <div class="sgrn">2</div><div class="sgc">Morning routine</div><div class="sgc grn">✓</div><div class="sgc grn">✓</div><div class="sgc grn">✓</div><div class="sgc grn">100%</div>
+        <div class="sgrn">3</div><div class="sgc">Exercise / movement</div><div class="sgc grn">✓</div><div class="sgc red">—</div><div class="sgc grn">✓</div><div class="sgc amber">71%</div>
+        <div class="sgrn">4</div><div class="sgc">Deep work block</div><div class="sgc grn">✓</div><div class="sgc grn">✓</div><div class="sgc grn">✓</div><div class="sgc grn">100%</div>
+        <div class="sgrn">5</div><div class="sgc">8 hours sleep</div><div class="sgc red">—</div><div class="sgc grn">✓</div><div class="sgc grn">✓</div><div class="sgc amber">71%</div>
+        <div class="sgrn">6</div><div class="sgc">No phone first hour</div><div class="sgc grn">✓</div><div class="sgc grn">✓</div><div class="sgc red">—</div><div class="sgc amber">71%</div>
+      </div>
+      <div class="tab-caption">Daily checkbox tracking for the habits that actually drive your goals. Week % calculates itself — duplicate the tab for a full 12-week history.</div>
+    </div>
+
+    <!-- 🪞 REVIEW -->
+    <div class="tab-panel" id="tab-review" style="display:none">
+      <div class="sheet-grid">
+        <div class="sgch"></div><div class="sgch">A</div><div class="sgch">B</div><div class="sgch">C</div><div class="sgch">D</div><div class="sgch">E</div>
+        <div class="sgrn">1</div><div class="sgc hdr" style="grid-column:span 5">📝 This Week's Review (repeat every Friday)</div>
+        <div class="sgrn">2</div><div class="sgc" style="grid-column:span 2">What went well this week?</div><div class="sgc" style="grid-column:span 3">Hit every fitness tactic, roadmap shared on time.</div>
+        <div class="sgrn">3</div><div class="sgc" style="grid-column:span 2">What didn't go to plan?</div><div class="sgc" style="grid-column:span 3">Side project landing page slipped — only 50% done.</div>
+        <div class="sgrn">4</div><div class="sgc hdr" style="grid-column:span 5">🏁 End-of-Cycle Review (Buffer Week)</div>
+        <div class="sgrn">5</div><div class="sgc" style="grid-column:span 2">Average execution score this cycle</div><div class="sgc hl grn" style="font-weight:600;grid-column:span 3">=Scorecard!D17 → 87%</div>
+      </div>
+      <div class="tab-caption">Weekly reflection plus an end-of-cycle review that pulls your final average score automatically — no copying numbers by hand.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- METHOD BANNER -->
+<div class="uk-banner">
+  <div class="uk-banner-inner">
+    <div class="uk-banner-label">Why Made Ready 12-Week Planner is different</div>
+    <div class="uk-stats">
+      <div class="uk-stat">
+        <div class="uk-stat-num">225</div>
+        <div class="uk-stat-desc">monthly Etsy searches for "12 Week Year" planners — high intent, low supply</div>
+      </div>
+      <div class="uk-stat-divider"></div>
+      <div class="uk-stat">
+        <div class="uk-stat-num">26</div>
+        <div class="uk-stat-desc">sellers currently competing for that search — one of the most lopsided ratios on Etsy</div>
+      </div>
+      <div class="uk-stat-divider"></div>
+      <div class="uk-stat">
+        <div class="uk-stat-num">0</div>
+        <div class="uk-stat-desc">other 12 Week Year templates found with automated execution scoring built in</div>
+      </div>
+      <div class="uk-stat-divider"></div>
+      <div class="uk-stat">
+        <div class="uk-stat-num">85%</div>
+        <div class="uk-stat-desc">execution score the methodology recommends — this tracker calculates it for you, live</div>
+      </div>
+    </div>
+    <div class="uk-banner-verdict">
+      Every other 12 Week Year template on Etsy is a static, manual-entry copy. Made Ready 12-Week Planner is the only one that scores your execution automatically.
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="si">
+    <div class="eyebrow">How it works</div>
+    <h2 class="sh2">From vague intentions to  a scored, executed plan</h2>
+    <p class="ssub">Set up once in under ten minutes. After that, Made Ready 12-Week Planner does the tallying for you.</p>
+
+    <div class="how-grid">
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="how-step-num">1</div>
+          <div>
+            <div class="how-step-title">Make a copy of the planner</div>
+            <div class="how-step-desc">Click the link in your Etsy download. Google Sheets opens a private copy in your own Google account. Nothing is ever shared with Made Ready Co.</div>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">2</div>
+          <div>
+            <div class="how-step-title">Write your vision and pick 3 goals</div>
+            <div class="how-step-desc">Go to the 🎯 Vision &amp; Goals tab. Describe what success looks like in 12 weeks, then choose a maximum of 3 goals — personal, work, or a mix of both.</div>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">3</div>
+          <div>
+            <div class="how-step-title">Plan every week's tactics</div>
+            <div class="how-step-desc">In 🗓️ Weekly Plan, break each goal into specific actions for all 12 weeks, plus the 13th buffer week. Dates calculate themselves from your start date.</div>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">4</div>
+          <div>
+            <div class="how-step-title">Score your execution every Friday</div>
+            <div class="how-step-desc">Click 🤖 Made Ready 12-Week → Score This Week. Tasks Set and Tasks Done pull automatically — you just rate your energy and jot a note.</div>
+            <div class="how-step-tag">MR12W Pro: AI Weekly Coach</div>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">5</div>
+          <div>
+            <div class="how-step-title">Review, reset, repeat</div>
+            <div class="how-step-desc">The 13th buffer week is built in for rest and reflection. Your average execution score carries through automatically to start planning the next cycle.</div>
+            <div class="how-step-tag">MR12W Pro — AI cycle insight</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="how-visual">
+        <div style="font-size:11px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px">MR12W Pro — AI layer (inside Google Sheets)</div>
+        <div class="flow-step">
+          <div class="flow-label">You click</div>
+          <div class="flow-value">🤖 Made Ready 12-Week → AI Weekly Coach</div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <div class="flow-label">Apps Script sends</div>
+          <div class="flow-value">Scorecard data → Made Ready API (anonymised)</div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <div class="flow-label">Claude AI reads and analyses</div>
+          <div class="flow-value flow-highlight">"Execution dips every Tuesday" → suggests a fix</div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <div class="flow-label">Results appear instantly in</div>
+          <div class="flow-value">📊 Scorecard tab — coaching note, no setup needed</div>
+        </div>
+        <div class="no-key-note">
+          <strong>Zero dependencies for you.</strong> No API key, no extra subscription, no leaving Google Sheets. The AI runs on Made Ready's infrastructure — included in your one-time purchase.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" style="background:var(--bg-mid);border-top:1px solid var(--border)">
+  <div class="si">
+    <div class="eyebrow">Features</div>
+    <h2 class="sh2">Everything in one automated  execution system</h2>
+    <p class="ssub">Built on the 12 Week Year methodology. Designed to eliminate the manual scoring and tallying that makes most goal trackers fall apart by week 3.</p>
+
+    <div class="feat-grid">
+      <div class="feat-card">
+        <span class="feat-icon">🎯</span>
+        <div class="feat-title">Vision &amp; 3-goal limit</div>
+        <p class="feat-p">A dedicated vision statement plus exactly 3 goal slots — never more. The methodology's core insight is that focus beats breadth; the sheet enforces it rather than just suggesting it.</p>
+        <div class="feat-tag">Standard + Pro</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">🗓️</span>
+        <div class="feat-title">12-week + buffer week grid</div>
+        <p class="feat-p">All 12 weeks plus the essential 13th buffer week for rest and reflection, visually distinguished. Start and end dates calculate automatically from your chosen cycle start date.</p>
+        <div class="feat-tag">Standard + Pro</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">📊</span>
+        <div class="feat-title">Automated execution scorecard</div>
+        <p class="feat-p">Tasks Set and Tasks Done pull straight from your Weekly Plan via formula — no manual counting. Execution % and status colour-code themselves against the 85% target.</p>
+        <div class="feat-tag">Standard + Pro</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">✨</span>
+        <div class="feat-title">AI Weekly Coach</div>
+        <p class="feat-p">Claude reads your scorecard patterns and surfaces what's actually happening — which days you slip, which goals are thriving — then suggests one specific adjustment.</p>
+        <div class="feat-tag pro">Pro only</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">🔁</span>
+        <div class="feat-title">Daily habit tracker</div>
+        <p class="feat-p">A simple checkbox grid for the habits that actually drive your goals. Week % calculates itself. Duplicate the tab in one click for a full 12-week history.</p>
+        <div class="feat-tag">Standard + Pro</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">💡</span>
+        <div class="feat-title">AI Cycle Insight</div>
+        <p class="feat-p">At the end of your 12 weeks, Claude analyses your full cycle and writes a personalised summary of what worked, what didn't, and what to change next cycle.</p>
+        <div class="feat-tag pro">Pro only</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">🪞</span>
+        <div class="feat-title">Weekly + cycle review prompts</div>
+        <p class="feat-p">Structured reflection questions every Friday, plus a deeper end-of-cycle review that pulls your final average execution score automatically — no copying numbers by hand.</p>
+        <div class="feat-tag">Standard + Pro</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">⚠️</span>
+        <div class="feat-title">Off-Track Alerts</div>
+        <p class="feat-p">Claude flags goals falling behind before the cycle ends — not in week 11 when it's too late to course-correct, but as soon as the pattern appears in your scorecard.</p>
+        <div class="feat-tag pro">Pro only</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">🔀</span>
+        <div class="feat-title">Works for any goal type</div>
+        <p class="feat-p">Personal, work, or both — the category system covers fitness, habits, learning, side projects, sales targets, and team OKRs in one flexible structure. No separate templates needed.</p>
+        <div class="feat-tag">Standard + Pro</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHOD EXPLAINER (What is the 12 Week Year?) -->
+<section class="csv-section method-section" id="method">
+  <div class="si">
+    <div class="eyebrow">Before you start</div>
+    <h2 class="sh2">What is the 12 Week Year —  and why 12 weeks, not 12 months?</h2>
+    <p class="ssub">You don't need to have read the book to use this. Here's everything you need to know.</p>
+
+    <div class="csv-grid">
+      <div class="csv-explainer">
+        <div class="csv-what">
+          <div class="csv-what-icon">📐</div>
+          <div>
+            <div class="csv-what-title">A year of urgency, compressed into 12 weeks</div>
+            <p class="csv-what-text">The 12 Week Year is an execution framework from the book of the same name by Brian Moran and Michael Lennington. The core idea: annual goals lose urgency by month three. Treating 12 weeks as if it were a full year — with a real deadline, not a vague annual target — keeps every week feeling like it matters.</p>
+            <p class="csv-what-text" style="margin-top:10px">It isn't about doing more. It's about doing <strong>fewer things, consistently</strong>, and measuring whether you actually did them — not just whether you hit the end result.</p>
+          </div>
+        </div>
+
+        <div class="csv-banks">
+          <div class="csv-banks-title">The five components — and where each lives in the sheet</div>
+          <div class="csv-bank-list">
+            <div class="csv-bank">
+              <div class="csv-bank-name">🌅 Vision</div>
+              <div class="csv-bank-steps">A vivid picture of what success looks like in 12 weeks — lives in <strong>🎯 Vision &amp; Goals</strong></div>
+            </div>
+            <div class="csv-bank">
+              <div class="csv-bank-name">🥇 Goals (max 3)</div>
+              <div class="csv-bank-steps">No more than 3 goals per cycle — more dilutes focus — set in <strong>🎯 Vision &amp; Goals</strong></div>
+            </div>
+            <div class="csv-bank">
+              <div class="csv-bank-name">🗓️ Weekly tactics</div>
+              <div class="csv-bank-steps">Specific actions for each of the 12 weeks, broken down in <strong>🗓️ Weekly Plan</strong></div>
+            </div>
+            <div class="csv-bank">
+              <div class="csv-bank-name">📊 Execution scoring</div>
+              <div class="csv-bank-steps">A weekly score of tasks completed vs planned — calculated automatically in <strong>📊 Scorecard</strong></div>
+            </div>
+            <div class="csv-bank">
+              <div class="csv-bank-name">⏳ Buffer week</div>
+              <div class="csv-bank-steps">A 13th week for rest, review, and resetting — built into <strong>🗓️ Weekly Plan</strong> and <strong>🪞 Review</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="csv-visual">
+        <div class="csv-card">
+          <div class="csv-card-label">The metric that matters most</div>
+          <div class="csv-file">
+            <div class="csv-file-header">
+              <span class="csv-file-icon">📊</span>
+              <span class="csv-file-name">execution_score.formula</span>
+            </div>
+            <div class="csv-code">
+<span class="csv-row csv-header">Week,Tasks Set,Tasks Done,Execution %</span>
+<span class="csv-row">Week 1,3,3,100%</span>
+<span class="csv-row">Week 2,3,2,67%</span>
+<span class="csv-row">Week 3,3,3,100%</span>
+<span class="csv-row">Week 4,3,3,100%</span>
+<span class="csv-row csv-more">... 8 more weeks</span>
+            </div>
+          </div>
+          <div class="csv-card-note">The methodology recommends targeting 85%+ execution. Most people overestimate how consistently they actually do what they planned — the scorecard removes the guesswork.</div>
+        </div>
+
+        <div class="csv-card" style="margin-top:14px">
+          <div class="csv-card-label">What the planner does with it</div>
+          <div class="csv-steps-mini">
+            <div class="csv-step-mini"><span class="csv-step-n">1</span><span>You tick off tactics as you complete them in Weekly Plan</span></div>
+            <div class="csv-step-mini"><span class="csv-step-n">2</span><span>The Scorecard counts Tasks Set and Tasks Done automatically</span></div>
+            <div class="csv-step-mini"><span class="csv-step-n">3</span><span>Execution % calculates itself and colour-codes against 85%</span></div>
+            <div class="csv-step-mini"><span class="csv-step-n">4</span><span>Your 12-week average rolls up into the end-of-cycle review</span></div>
+          </div>
+          <div class="csv-card-note" style="margin-top:12px">No spreadsheet maths required. Tick the box, the rest happens on its own.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section id="comparison">
+  <div class="si">
+    <div class="eyebrow">Side by side</div>
+    <h2 class="sh2">Made Ready 12-Week Planner  Standard vs Pro</h2>
+    <p class="ssub">Both give you the fully automated 12 Week Year system. Pro adds Claude AI running invisibly inside the sheet.</p>
+
+    <div class="compare-table">
+      <div class="compare-hdr">
+        <div class="chc">Feature</div>
+        <div class="chc">Standard<br>£12.99</div>
+        <div class="chc pro">Pro<br>£24.99</div>
+      </div>
+
+      <div class="compare-section">Core planner</div>
+      <div class="crow"><div class="cc feat">6-tab Google Sheets system<small>Vision &amp; Goals, Action Plan, Weekly Plan, Scorecard, Habit Tracker, Review</small></div><div class="cc chk"><span class="chk-yes">✓</span></div><div class="cc pro-chk"><span class="chk-yes">✓</span></div></div>
+      <div class="crow"><div class="cc feat">3-goal focus system<small>Hard-capped, vision-led goal setting</small></div><div class="cc chk"><span class="chk-yes">✓</span></div><div class="cc pro-chk"><span class="chk-yes">✓</span></div></div>
+      <div class="crow"><div class="cc feat">12-week + buffer week grid<small>Auto-calculated dates from your start date</small></div><div class="cc chk"><span class="chk-yes">✓</span></div><div class="cc pro-chk"><span class="chk-yes">✓</span></div></div>
+      <div class="crow"><div class="cc feat">Daily habit tracker<small>Duplicate for full 12-week history</small></div><div class="cc chk"><span class="chk-yes">✓</span></div><div class="cc pro-chk"><span class="chk-yes">✓</span></div></div>
+
+      <div class="compare-section">Execution scoring</div>
+      <div class="crow"><div class="cc feat">Automated scorecard<small>Tasks Set / Done pull from Weekly Plan automatically</small></div><div class="cc chk"><span class="chk-yes">✓</span></div><div class="cc pro-chk"><span class="chk-yes">✓</span></div></div>
+      <div class="crow"><div class="cc feat">85% target colour-coding<small>Status updates live as you tick off tactics</small></div><div class="cc chk"><span class="chk-yes">✓</span></div><div class="cc pro-chk"><span class="chk-yes">✓</span></div></div>
+
+      <div class="compare-section">AI insights (Pro only)</div>
+      <div class="crow"><div class="cc feat">AI Weekly Coach<small>Reviews your scorecard, suggests one specific adjustment</small></div><div class="cc chk"><span class="chk-no">–</span></div><div class="cc pro-chk"><span class="chk-ai">AI</span></div></div>
+      <div class="crow"><div class="cc feat">AI Cycle Insight<small>Full 12-week performance analysis at cycle end</small></div><div class="cc chk"><span class="chk-no">–</span></div><div class="cc pro-chk"><span class="chk-ai">AI</span></div></div>
+      <div class="crow"><div class="cc feat">Off-Track Alerts<small>Flags struggling goals before the cycle ends</small></div><div class="cc chk"><span class="chk-no">–</span></div><div class="cc pro-chk"><span class="chk-ai">AI</span></div></div>
+
+      <div class="compare-section">Delivery &amp; setup</div>
+      <div class="crow"><div class="cc feat">ReadMe PDF + Loom setup video<small>Most buyers set up in under 10 minutes</small></div><div class="cc chk"><span class="chk-yes">✓</span></div><div class="cc pro-chk"><span class="chk-yes">✓</span></div></div>
+      <div class="crow"><div class="cc feat">Requires API key or extra subscription<small>Buyer needs only a free Google account</small></div><div class="cc chk"><span class="chk-no">–</span></div><div class="cc pro-chk"><span class="chk-no">–</span></div></div>
+      <div class="crow"><div class="cc feat">Works entirely inside Google Sheets<small>No external apps, no browser tabs, no extra logins</small></div><div class="cc chk"><span class="chk-yes">✓</span></div><div class="cc pro-chk"><span class="chk-yes">✓</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background:var(--bg-mid);border-top:1px solid var(--border)">
+  <div class="si">
+    <div class="eyebrow">Pricing</div>
+    <h2 class="sh2">One price. Yours for  every cycle, forever.</h2>
+    <p class="ssub">No monthly fees. No subscription. Buy once on Etsy, reuse it for every 12-week cycle for as long as you're working toward something.</p>
+
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-name">Standard</div>
+        <div class="price-amount">£12.99</div>
+        <div class="price-period">One-time · instant Etsy download</div>
+        <p class="price-desc">The full automated 12 Week Year system for Google Sheets. Works the moment you open it. Perfect for your first cycle or anyone switching from a static planner.</p>
+        <div class="pc-feature"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#2EA043"/><path d="M4 7l2 2 4-4" stroke="#2EA043" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>6-tab Google Sheets 12-week system</span></div>
+        <div class="pc-feature"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#2EA043"/><path d="M4 7l2 2 4-4" stroke="#2EA043" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Automated execution scorecard</span></div>
+        <div class="pc-feature"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#2EA043"/><path d="M4 7l2 2 4-4" stroke="#2EA043" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Daily habit tracker</span></div>
+        <div class="pc-feature"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#2EA043"/><path d="M4 7l2 2 4-4" stroke="#2EA043" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Works for personal, work, or both</span></div>
+        <div class="pc-feature"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#2EA043"/><path d="M4 7l2 2 4-4" stroke="#2EA043" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>ReadMe PDF + 90-second Loom walkthrough</span></div>
+        <a href="#get-it" class="price-cta">Get Standard — £12.99</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-badge">Most powerful</div>
+        <div class="price-name">Made Ready 12-Week Planner Pro</div>
+        <div class="price-amount">£24.99</div>
+        <div class="price-period">One-time · instant Etsy download · or £10 upgrade from Standard</div>
+        <p class="price-desc">Everything in Standard plus Claude AI running inside your planner. A weekly coach, a cycle-end analysis, and alerts before you fall too far behind.</p>
+        <div class="pc-feature"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#2EA043"/><path d="M4 7l2 2 4-4" stroke="#2EA043" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Everything in Standard</strong></span></div>
+        <div class="pc-feature"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#2EA043"/><path d="M4 7l2 2 4-4" stroke="#2EA043" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>✨ AI Weekly Coach — reviews your scorecard every Friday</span></div>
+        <div class="pc-feature"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#2EA043"/><path d="M4 7l2 2 4-4" stroke="#2EA043" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>💡 AI Cycle Insight — written summary at cycle end</span></div>
+        <div class="pc-feature"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#2EA043"/><path d="M4 7l2 2 4-4" stroke="#2EA043" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>⚠️ Off-Track Alerts — catches slipping goals early</span></div>
+        <div class="pc-feature"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#2EA043"/><path d="M4 7l2 2 4-4" stroke="#2EA043" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>No API key — runs on Made Ready's infrastructure</span></div>
+        <a href="#get-it" class="price-cta">Get Pro — £24.99</a>
+      </div>
+    </div>
+    <div class="upgrade-note">Already own Standard? <a href="#get-it">Upgrade for £10 →</a></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="si">
+    <div class="eyebrow">What people say</div>
+    <h2 class="sh2">From people who finally  finished a 12-week cycle</h2>
+
+    <div class="stats-row">
+      <div class="stat-cell"><div class="stat-num">225</div><div class="stat-label">monthly searches for 12 Week Year planners</div></div>
+      <div class="stat-cell"><div class="stat-num">26</div><div class="stat-label">competing sellers — one of Etsy's most open gaps</div></div>
+      <div class="stat-cell"><div class="stat-num">0</div><div class="stat-label">other trackers with automated execution scoring</div></div>
+    </div>
+
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="proof-stars">★★★★★</div>
+        <p class="proof-text">"I've started the 12 Week Year three times and given up by week 4 because tallying my own scorecard felt like homework. This does it for me. I actually finished a full cycle for the first time."</p>
+        <div class="proof-author">
+          <div class="proof-avatar">DH</div>
+          <div><div class="proof-name">Daniel H.</div><div class="proof-meta">MR12W Standard · Bristol</div></div>
+        </div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-stars">★★★★★</div>
+        <p class="proof-text">"The Pro AI coach noticed I was failing my Tuesday tactics every single week before I'd even noticed the pattern myself. Moved my gym session to Monday and my score jumped 20%."</p>
+        <div class="proof-author">
+          <div class="proof-avatar">PA</div>
+          <div><div class="proof-name">Priya A.</div><div class="proof-meta">MR12W Pro · Leeds</div></div>
+        </div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-stars">★★★★★</div>
+        <p class="proof-text">"Used this for a work OKR cycle and a personal fitness goal at the same time, in the same sheet. Didn't expect that to work as well as it did. Genuinely the best £12.99 I've spent this year."</p>
+        <div class="proof-author">
+          <div class="proof-avatar">TW</div>
+          <div><div class="proof-name">Tom W.</div><div class="proof-meta">MR12W Standard · Manchester</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:var(--bg-mid);border-top:1px solid var(--border)">
+  <div class="si" style="max-width:760px">
+    <div class="eyebrow">Questions</div>
+    <h2 class="sh2">Things people ask before buying</h2>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Do I need to have read the 12 Week Year book?<span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>No. The "What is the 12 Week Year?" section above explains everything you need — vision, 3-goal focus, weekly tactics, execution scoring, and the buffer week. The sheet itself guides you through each step the first time you open it.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Can I use this for both personal and work goals?<span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>Yes — this was a specific design choice. The Planning Mode setting and category dropdown cover fitness, habits, learning, side projects, career, sales targets, and team OKRs in one flexible structure. Many buyers run one personal goal and two work goals in the same cycle.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What happens after 12 weeks — do I need to buy it again?<span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>No. Duplicate the relevant tabs (Weekly Plan, Scorecard, Habit Tracker) for your next cycle, or simply update the cycle start date in Vision &amp; Goals and clear last cycle's data. One purchase covers every 12-week cycle you ever run.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Do I need any technical knowledge to use this?<span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>None at all. You need a free Google account and the ability to tick a checkbox. The ReadMe PDF and 90-second Loom video walk you through every step. Most buyers are set up and planning their first week in under 10 minutes.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Does the Pro version require an API key or subscription?<span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>No. All you need is a free Google account. The AI features in MR12W Pro — Weekly Coach, Cycle Insight, Off-Track Alerts — run on Made Ready's own infrastructure, covered by your one-time purchase. No Anthropic account, no Claude subscription.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">I already bought Standard. How do I upgrade to Pro?<span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>Search "Made Ready 12-Week Planner Pro Upgrade" in the Made Ready Co Etsy shop — listed at £10 for existing Standard customers. Your existing goals, weekly plan, and scorecard history copy across in about two minutes.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Does this work on iPhone or Android?<span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>Yes — Google Sheets has full iOS and Android apps. The habit tracker and scorecard are fully usable on mobile, which most buyers use for the daily habit check-ins. We recommend doing the initial weekly planning on a laptop or desktop.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Will this work with Microsoft Excel?<span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>Made Ready 12-Week Planner is built specifically for Google Sheets and uses Google's Apps Script for all automation — the auto-scoring, the menu, and the AI features. It is not compatible with Microsoft Excel. A free Google account is all you need.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="etsy-section" id="get-it">
+  <div class="si">
+    <div class="eyebrow">Available on Etsy</div>
+    <h2 class="sh2">Ready to actually finish  a 12-week cycle?</h2>
+    <p class="ssub" style="margin:0 auto">Get Made Ready 12-Week Planner Standard for £12.99 or go straight to Pro for £24.99. One-time purchase. Instant Etsy download. Works entirely inside your own Google account.</p>
+    <div class="etsy-actions">
+      <a href="https://etsy.com" class="btn-primary">Buy on Etsy</a>
+      <a href="#comparison" class="btn-secondary">Compare versions</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-mark">
+          <svg viewBox="0 0 16 16"><path d="M2 2h5v5H2zM9 2h5v5H9zM2 9h5v5H2zM9 9h5v5H9z"/></svg>
+        </div>
+        <span class="nav-brand">Made Ready Co</span>
+      </a>
+      <p class="footer-brand-text">Digital tools that do exactly what they should. Built for people who want to spend less time tracking their progress and more time actually making it.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Product</h5>
+      <a href="#features">Features</a>
+      <a href="#method">What is the 12 Week Year?</a>
+      <a href="#comparison">Standard vs Pro</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h5>Made Ready Co</h5>
+      <a href="https://madeready.co">madeready.co</a>
+      <a href="mailto:madeready.co@gmail.com">madeready.co@gmail.com</a>
+      <a href="https://etsy.com">Etsy shop</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Made Ready Co · madeready.co · All rights reserved</span>
+    <div class="footer-tags">
+      <span class="footer-tag">Made Ready 12-Week Planner</span>
+      <span class="footer-tag">Google Sheets UK</span>
+      <span class="footer-tag">12 Week Year automated</span>
+      <span class="footer-tag">Execution scorecard</span>
+      <span class="footer-tag">Digital download · Etsy</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── SHEET TABS ── */
+var tabFormulas={
+  vision:    {ref:'B3', val:'=B4+83'},
+  weekly:    {ref:'B2', val:"='🎯 Vision & Goals'!$B$4+0"},
+  scorecard: {ref:'D17',val:'=IFERROR(AVERAGE(D3:D14),0)'},
+  habits:    {ref:'I3', val:'=IFERROR(COUNTIF(B3:H3,TRUE)/7,0)'},
+  review:    {ref:'B6', val:"=IFERROR('📊 Scorecard'!D17,\"—\")"}
+};
+function switchTab(name){
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.style.display='none';});
+  document.querySelectorAll('.stab').forEach(function(t){t.classList.remove('active');});
+  var panel=document.getElementById('tab-'+name);
+  if(panel)panel.style.display='block';
+  var activeTab=document.querySelector('.stab[data-tab="'+name+'"]');
+  if(activeTab)activeTab.classList.add('active');
+  var f=tabFormulas[name];
+  if(f){
+    document.getElementById('sfb-ref').textContent=f.ref;
+    document.getElementById('sfb-val').textContent=f.val;
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){switchTab('vision');});
+
+/* ── THEME ── */
+function toggleTheme(){
+  var html=document.documentElement;
+  var current=html.getAttribute('data-theme');
+  var next=current==='dark'?'light':'dark';
+  html.setAttribute('data-theme',next);
+  document.getElementById('theme-btn').textContent=next==='dark'?'☀️':'🌙';
+  try{localStorage.setItem('mr12w-theme',next);}catch(e){}
+}
+(function(){
+  try{
+    var saved=localStorage.getItem('mr12w-theme');
+    if(saved){
+      document.documentElement.setAttribute('data-theme',saved);
+    }
+  }catch(e){}
+  document.addEventListener('DOMContentLoaded',function(){
+    var theme=document.documentElement.getAttribute('data-theme');
+    document.getElementById('theme-btn').textContent=theme==='dark'?'☀️':'🌙';
+  });
+})();
+
+/* ── MOBILE MENU ── */
+function toggleMenu(){
+  var menu=document.getElementById('mobile-menu');
+  var btn=document.getElementById('hamburger');
+  var isOpen=menu.classList.contains('show');
+  if(isOpen){closeMenu();}
+  else{
+    menu.style.display='flex';
+    requestAnimationFrame(function(){menu.classList.add('show');});
+    btn.classList.add('open');
+    btn.setAttribute('aria-expanded','true');
+  }
+}
+function closeMenu(){
+  var menu=document.getElementById('mobile-menu');
+  var btn=document.getElementById('hamburger');
+  menu.classList.remove('show');
+  btn.classList.remove('open');
+  btn.setAttribute('aria-expanded','false');
+  setTimeout(function(){menu.style.display='none';},250);
+}
+
+/* ── FAQ ACCORDION ── */
+function toggleFaq(el){
+  var item=el.parentElement;
+  var wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');});
+  if(!wasOpen){item.classList.add('open');}
+}
+</script>
+
+</body>
+</html>
