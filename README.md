@@ -2,7 +2,7 @@
 
 The public-facing marketing site for **Made Ready 12-Week Planner (MR12W)** — the only Google Sheets 12 Week Year tracker on Etsy with built-in automated execution scoring. Sold by [Made Ready Co](https://madeready.co) on Etsy.
 
-Live at: **[madereadyco.github.io/mr12w-site](https://madereadyco.github.io/mr12w-site/)**
+Live at: **[https://12-week-planner-ochre.vercel.app](https://12-week-planner-ochre.vercel.app)**
 
 ---
 
